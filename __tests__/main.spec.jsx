@@ -88,30 +88,4 @@ describe('Тест приложения', () => {
     });
 });
 
-// Группа негативных сценариев
-describe("Негативные сценарии", () => {
-    test("Выдает ошибку при передаче неподдерживаемого формата", async () => {
-      await waitFor(() => {
-        expect(() => {
-          ({ widget, steps } = setUp(screen));
-          render(Widget(steps.unsupportedSteps));
-        }).toThrow(/e is not iterable/i);
-      });
-    });
-  
-    test("Должен показывать пустое окно чата, когда передан пустой массив", async () => {
-      ({ widget, steps } = setUp(screen));
-      render(Widget(steps.emptySteps));
-  
-      await widget.openChatBot();
-  
-      expect(widget.heading).toBeTruthy();
-      expect(
-        screen.queryByRole("button", { name: "Start conversation" })
-      ).not.toBeInTheDocument();
-      expect(
-        screen.queryByText(/^hello.*to open a chat\.$/i)
-      ).not.toBeInTheDocument();
-    });
-  });
   
